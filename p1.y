@@ -77,13 +77,13 @@ int divEnt(int a, int b);
 %token coma
 %token dospunt
 %token punt
-
+%token gtg
 %token tab
 
 %token <num> number
 %token <id> identifier
 %type <num> line exp T F X term 
-%type <id> assignment
+%type <id> assignment 
 
 %%
 
@@ -149,10 +149,13 @@ line    : assignment ';'	     {;}
         | line coma ';'              {printf("estoy viendo un coma\n");}
         | line dospunt ';'           {printf("estoy viendo un dospunt\n");}
         | line punt ';'              {printf("estoy viendo un punt\n");}
-        | line tab ';'               {printf("estoy viendo un tab\n")}
+        | line tab ';'               {printf("estoy viendo un tab\n");}
+        | line gtg ';'               {printf("estoy viendo una cadena\n");}
         ;
 
 assignment : identifier '=' exp  { updateSymbolVal($1,$3); }
+           | identifier '=' gtg  { ;} //esto es una cadena no tocar
+           
 		   ;
 
 exp     : exp bitleft X     {$$ = $1  << $3;}

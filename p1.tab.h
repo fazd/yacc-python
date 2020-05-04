@@ -96,9 +96,10 @@
      coma = 312,
      dospunt = 313,
      punt = 314,
-     tab = 315,
-     number = 316,
-     identifier = 317
+     gtg = 315,
+     tab = 316,
+     number = 317,
+     identifier = 318
    };
 #endif
 
@@ -114,7 +115,7 @@ int num; int id;
 
 
 /* Line 1676 of yacc.c  */
-#line 118 "p1.tab.h"
+#line 119 "p1.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

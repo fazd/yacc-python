@@ -78,7 +78,6 @@ int yylex();
 ":"                     { return dospunt; }
 "."                     { return punt; }
 "\t"                    { return tab; }
-
 [a-zA-Z_][a-zA-Z0-9_]*	{
     for(i = 0; i < idcont; i++){
         if(strcmp(array[i],yytext)==0){
@@ -96,6 +95,7 @@ int yylex();
     yylval.id = asID; return identifier;
     }
 
+((['][^'".\n]+[']|["][^'".\n]+["])|[’][^'"\n]+[’]) {return gtg;}
 
 [0-9]+                              {yylval.num = atoi(yytext); return number;}
 [ \n]                               ;
