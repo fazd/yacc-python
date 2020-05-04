@@ -155,7 +155,7 @@ line    : assignment ';'	     {;}
 
 assignment : identifier '=' exp  { updateSymbolVal($1,$3); }
            | identifier '=' gtg  { ;} //esto es una cadena no tocar
-           
+           | identifier '=' identifier v_identifier
 		   ;
 
 exp     : exp bitleft X     {$$ = $1  << $3;}
@@ -193,6 +193,11 @@ F       : parabre exp parcierr       {$$ = $2;}
 term   	: number                        {$$ = $1;}
 	| identifier			{$$ = symbolVal($1);} 
         ;
+
+vec     : identifier                  {;}
+        | identifier coma vec                    {;}
+
+v_identifier : corabre vec  corcierr     {;}
 
 %%                     /* C code */
 
