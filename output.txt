@@ -1,0 +1,5 @@
+DEF  id1=eval parabre=( id2=xi coma=,  id3=exp parcierr=) dospunt=: 
+id1:eval
+id2:xi
+id3:exp
+0 Errores
