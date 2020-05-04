@@ -76,16 +76,18 @@ int yylex();
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include<string.h> 
 
-int symbols[52];
-int symbolVal(char symbol);
-void updateSymbolVal(char symbol, int val);
+int symbols[500];
+int arrNum[500];
+int symbolVal(int symbol);
+void updateSymbolVal(int symbol, int val);
 int power(int a, int b);
 int divEnt(int a, int b);
 
 
 /* Line 189 of yacc.c  */
-#line 89 "p1.tab.c"
+#line 91 "p1.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -182,12 +184,12 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 16 "p1.y"
-int num; char id;
+#line 18 "p1.y"
+int num; int id;
 
 
 /* Line 214 of yacc.c  */
-#line 191 "p1.tab.c"
+#line 193 "p1.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -199,7 +201,7 @@ int num; char id;
 
 
 /* Line 264 of yacc.c  */
-#line 203 "p1.tab.c"
+#line 205 "p1.tab.c"
 
 #ifdef short
 # undef short
@@ -526,15 +528,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    90,    90,    91,    92,    93,    94,    95,    96,    97,
-      98,    99,   100,   101,   102,   103,   104,   105,   106,   107,
-     108,   109,   110,   111,   112,   113,   114,   115,   116,   117,
-     118,   119,   120,   121,   122,   123,   124,   125,   126,   127,
-     128,   129,   130,   131,   132,   133,   134,   135,   136,   137,
-     138,   139,   140,   141,   142,   143,   144,   145,   146,   147,
-     148,   149,   150,   153,   156,   157,   158,   159,   160,   161,
-     162,   163,   165,   166,   167,   170,   171,   172,   173,   174,
-     175,   181,   182,   183,   188,   189
+       0,    92,    92,    93,    94,    95,    96,    97,    98,    99,
+     100,   101,   102,   103,   104,   105,   106,   107,   108,   109,
+     110,   111,   112,   113,   114,   115,   116,   117,   118,   119,
+     120,   121,   122,   123,   124,   125,   126,   127,   128,   129,
+     130,   131,   132,   133,   134,   135,   136,   137,   138,   139,
+     140,   141,   142,   143,   144,   145,   146,   147,   148,   149,
+     150,   151,   152,   155,   158,   159,   160,   161,   162,   163,
+     164,   165,   167,   168,   169,   172,   173,   174,   175,   176,
+     177,   183,   184,   185,   190,   191
 };
 #endif
 
@@ -1544,595 +1546,595 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 90 "p1.y"
+#line 92 "p1.y"
     {;;}
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 91 "p1.y"
+#line 93 "p1.y"
     {exit(EXIT_SUCCESS);;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 92 "p1.y"
+#line 94 "p1.y"
     {printf("Printing %d\n", (yyvsp[(2) - (3)].num));;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 93 "p1.y"
+#line 95 "p1.y"
     {;;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 94 "p1.y"
+#line 96 "p1.y"
     {printf("Printing %d\n", (yyvsp[(3) - (4)].num));;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 95 "p1.y"
+#line 97 "p1.y"
     {exit(EXIT_SUCCESS);;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 96 "p1.y"
+#line 98 "p1.y"
     {printf("estoy viendo un AND\n");;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 97 "p1.y"
+#line 99 "p1.y"
     {printf("estoy viendo un BREAK\n");;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 98 "p1.y"
+#line 100 "p1.y"
     {printf("estoy viendo un CONTINUE\n");;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 99 "p1.y"
+#line 101 "p1.y"
     {printf("estoy viendo un DEF\n");;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 100 "p1.y"
+#line 102 "p1.y"
     {printf("estoy viendo un ELIF\n");;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 101 "p1.y"
+#line 103 "p1.y"
     {printf("estoy viendo un ELSE\n");;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 102 "p1.y"
+#line 104 "p1.y"
     {printf("estoy viendo un FOR\n");;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 103 "p1.y"
+#line 105 "p1.y"
     {printf("estoy viendo un IF\n");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 104 "p1.y"
+#line 106 "p1.y"
     {printf("estoy viendo un IMPORT\n");;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 105 "p1.y"
+#line 107 "p1.y"
     {printf("estoy viendo un IN\n");;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 106 "p1.y"
+#line 108 "p1.y"
     {printf("estoy viendo un IS\n");;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 107 "p1.y"
+#line 109 "p1.y"
     {printf("estoy viendo un NOT\n");;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 108 "p1.y"
+#line 110 "p1.y"
     {printf("estoy viendo un OR\n");;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 109 "p1.y"
+#line 111 "p1.y"
     {printf("estoy viendo un PASS\n");;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 110 "p1.y"
+#line 112 "p1.y"
     {printf("estoy viendo un RETURN\n");;}
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 111 "p1.y"
+#line 113 "p1.y"
     {printf("estoy viendo un WHILE\n");;}
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 112 "p1.y"
+#line 114 "p1.y"
     {printf("estoy viendo un TRUE\n");;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 113 "p1.y"
+#line 115 "p1.y"
     {printf("estoy viendo un FALSE\n");;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 114 "p1.y"
+#line 116 "p1.y"
     {printf("estoy viendo un RANGE\n");;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 115 "p1.y"
+#line 117 "p1.y"
     {printf("estoy viendo un bitrightig\n");;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 116 "p1.y"
+#line 118 "p1.y"
     {printf("estoy viendo un bitleftig\n");;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 117 "p1.y"
+#line 119 "p1.y"
     {printf("estoy viendo un divEntig\n");;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 118 "p1.y"
+#line 120 "p1.y"
     {printf("estoy viendo un potig\n");;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 119 "p1.y"
+#line 121 "p1.y"
     {printf("estoy viendo un masig\n");;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 120 "p1.y"
+#line 122 "p1.y"
     {printf("estoy viendo un menig\n");;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 121 "p1.y"
+#line 123 "p1.y"
     {printf("estoy viendo un multig\n");;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 122 "p1.y"
+#line 124 "p1.y"
     {printf("estoy viendo un divig\n");;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 123 "p1.y"
+#line 125 "p1.y"
     {printf("estoy viendo un andig\n");;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 124 "p1.y"
+#line 126 "p1.y"
     {printf("estoy viendo un orig\n");;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 125 "p1.y"
+#line 127 "p1.y"
     {printf("estoy viendo un xorig\n");;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 126 "p1.y"
+#line 128 "p1.y"
     {printf("estoy viendo un modig\n");;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 127 "p1.y"
+#line 129 "p1.y"
     {printf("estoy viendo un pot\n");;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 128 "p1.y"
+#line 130 "p1.y"
     {printf("estoy viendo un bitleft\n");;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 129 "p1.y"
+#line 131 "p1.y"
     {printf("estoy viendo un bitright\n");;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 130 "p1.y"
+#line 132 "p1.y"
     {printf("estoy viendo un menorig\n");;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 131 "p1.y"
+#line 133 "p1.y"
     {printf("estoy viendo un mayorig\n");;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 132 "p1.y"
+#line 134 "p1.y"
     {printf("estoy viendo un dif\n");;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 133 "p1.y"
+#line 135 "p1.y"
     {printf("estoy viendo un distin\n");;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 134 "p1.y"
+#line 136 "p1.y"
     {printf("estoy viendo un igual\n");;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 135 "p1.y"
+#line 137 "p1.y"
     {printf("estoy viendo un divent\n");;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 136 "p1.y"
+#line 138 "p1.y"
     {printf("estoy viendo un mod\n");;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 137 "p1.y"
+#line 139 "p1.y"
     {printf("estoy viendo un and\n");;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 138 "p1.y"
+#line 140 "p1.y"
     {printf("estoy viendo un or\n");;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 139 "p1.y"
+#line 141 "p1.y"
     {printf("estoy viendo un xor\n");;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 140 "p1.y"
+#line 142 "p1.y"
     {printf("estoy viendo un negac\n");;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 141 "p1.y"
+#line 143 "p1.y"
     {printf("estoy viendo un menorque\n");;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 142 "p1.y"
+#line 144 "p1.y"
     {printf("estoy viendo un mayorque\n");;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 143 "p1.y"
+#line 145 "p1.y"
     {printf("estoy viendo un parabre\n");;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 144 "p1.y"
+#line 146 "p1.y"
     {printf("estoy viendo un parcierr\n");;}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 145 "p1.y"
+#line 147 "p1.y"
     {printf("estoy viendo un corabre\n");;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 146 "p1.y"
+#line 148 "p1.y"
     {printf("estoy viendo un corcierr\n");;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 147 "p1.y"
+#line 149 "p1.y"
     {printf("estoy viendo un coma\n");;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 148 "p1.y"
+#line 150 "p1.y"
     {printf("estoy viendo un dospunt\n");;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 149 "p1.y"
+#line 151 "p1.y"
     {printf("estoy viendo un punt\n");;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 150 "p1.y"
+#line 152 "p1.y"
     {printf("estoy viendo un tab\n");}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 153 "p1.y"
+#line 155 "p1.y"
     { updateSymbolVal((yyvsp[(1) - (3)].id),(yyvsp[(3) - (3)].num)); ;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 156 "p1.y"
+#line 158 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num)  << (yyvsp[(3) - (3)].num);;}
     break;
 
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 157 "p1.y"
+#line 159 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) >> (yyvsp[(3) - (3)].num);;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 158 "p1.y"
+#line 160 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) | (yyvsp[(3) - (3)].num);;}
     break;
 
   case 67:
 
 /* Line 1455 of yacc.c  */
-#line 159 "p1.y"
+#line 161 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) & (yyvsp[(3) - (3)].num);;}
     break;
 
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 160 "p1.y"
+#line 162 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) | (yyvsp[(3) - (3)].num);;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 161 "p1.y"
+#line 163 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) & (yyvsp[(3) - (3)].num);;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 162 "p1.y"
+#line 164 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) ^ (yyvsp[(3) - (3)].num);;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 163 "p1.y"
+#line 165 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 165 "p1.y"
+#line 167 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) + (yyvsp[(3) - (3)].num);;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 166 "p1.y"
+#line 168 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) - (yyvsp[(3) - (3)].num);;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 167 "p1.y"
+#line 169 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 170 "p1.y"
+#line 172 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) * (yyvsp[(3) - (3)].num);;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 171 "p1.y"
+#line 173 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) / (yyvsp[(3) - (3)].num);;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 172 "p1.y"
+#line 174 "p1.y"
     {(yyval.num) = divEnt((yyvsp[(1) - (3)].num),(yyvsp[(3) - (3)].num));;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 173 "p1.y"
+#line 175 "p1.y"
     {(yyval.num) = power((yyvsp[(1) - (3)].num),(yyvsp[(3) - (3)].num));;}
     break;
 
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 174 "p1.y"
+#line 176 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) % (yyvsp[(3) - (3)].num);;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 175 "p1.y"
+#line 177 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 181 "p1.y"
+#line 183 "p1.y"
     {(yyval.num) = (yyvsp[(2) - (3)].num);;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 182 "p1.y"
+#line 184 "p1.y"
     {(yyval.num) = -(yyvsp[(2) - (2)].num);;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 183 "p1.y"
+#line 185 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 188 "p1.y"
+#line 190 "p1.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 189 "p1.y"
+#line 191 "p1.y"
     {(yyval.num) = symbolVal((yyvsp[(1) - (1)].id));;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2136 "p1.tab.c"
+#line 2138 "p1.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2344,32 +2346,33 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 192 "p1.y"
+#line 194 "p1.y"
                      /* C code */
 
-int computeSymbolIndex(char token)
-{
-	int idx = -1;
-	if(islower(token)) {
-		idx = token - 'a' + 26;
-	} else if(isupper(token)) {
-		idx = token - 'A';
-	}
-	return idx;
+int computeSymbolIndex(int token)
+{       
+	return token;
 } 
 
 /* returns the value of a given symbol */
-int symbolVal(char symbol)
+int symbolVal(int symbol)
 {
-	int bucket = computeSymbolIndex(symbol);
-	return symbols[bucket];
+        int bucket = computeSymbolIndex(symbol);
+	int type = symbols[bucket]; 
+        if(type == 0){
+                return arrNum[bucket]; 
+        }
+	
 }
 
 /* updates the value of a given symbol */
-void updateSymbolVal(char symbol, int val)
+void updateSymbolVal(int symbol, int val)
 {
 	int bucket = computeSymbolIndex(symbol);
-	symbols[bucket] = val;
+	int type = symbols[bucket]; 
+        if(type == 0){
+                arrNum[bucket] = val; 
+        }
 }
 
 int power(int a, int b)

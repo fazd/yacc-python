@@ -109,8 +109,8 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 16 "p1.y"
-int num; char id;
+#line 18 "p1.y"
+int num; int id;
 
 
 /* Line 1676 of yacc.c  */

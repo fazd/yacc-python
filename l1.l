@@ -1,5 +1,20 @@
 %{
 #include "p1.tab.h"
+#include<stdio.h> 
+#include<string.h> 
+#include <ctype.h> 
+
+int cont = 0;
+int sw = 0;
+int idcont=0;
+int i = 0;
+int found=0;
+int asID=0;
+int comment = 0;
+int err = 0;
+char array[200][70];
+char wordaux[60];
+
 void yyerror (char *s);
 int yylex();
 %}
@@ -64,11 +79,28 @@ int yylex();
 "."                     { return punt; }
 "\t"                    { return tab; }
 
-[a-zA-Z]			    {yylval.id = yytext[0]; return identifier;}
-[0-9]+                  {yylval.num = atoi(yytext); return number;}
-[ \n]                 ;
-[-+*/=;]                {return yytext[0];}
-.                       {ECHO; yyerror ("unexpected character");}
+[a-zA-Z_][a-zA-Z0-9_]*	{
+    for(i = 0; i < idcont; i++){
+        if(strcmp(array[i],yytext)==0){
+        asID = i+1;
+        found = 1;
+        break;
+        }
+    }
+    if(found==0){
+        strcpy(array[idcont],yytext);
+        asID = idcont+1;
+        idcont++;
+    }
+    found = 0;
+    yylval.id = asID; return identifier;
+    }
+
+
+[0-9]+                              {yylval.num = atoi(yytext); return number;}
+[ \n]                               ;
+[-+*/=;]                            {return yytext[0];}
+.                                   {ECHO; yyerror ("unexpected character");}
 
 
 %%

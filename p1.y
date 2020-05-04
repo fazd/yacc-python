@@ -5,15 +5,17 @@ int yylex();
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include<string.h> 
 
-int symbols[52];
-int symbolVal(char symbol);
-void updateSymbolVal(char symbol, int val);
+int symbols[500];
+int arrNum[500];
+int symbolVal(int symbol);
+void updateSymbolVal(int symbol, int val);
 int power(int a, int b);
 int divEnt(int a, int b);
 %}
 
-%union {int num; char id;}         /* Yacc definitions */
+%union {int num; int id;}         /* Yacc definitions */
 %start line
 %token print
 %token exit_command
@@ -87,12 +89,12 @@ int divEnt(int a, int b);
 
 /* descriptions of expected inputs     corresponding actions (in C) */
 
-line    : assignment ';'	 	     {;}
-		| exit_command ';'		     {exit(EXIT_SUCCESS);}
-		| print exp ';'			     {printf("Printing %d\n", $2);}
-		| line assignment ';'	     {;}
-		| line print exp ';'	     {printf("Printing %d\n", $3);}
-		| line exit_command ';'	     {exit(EXIT_SUCCESS);}
+line    : assignment ';'	     {;}
+        | exit_command ';'	     {exit(EXIT_SUCCESS);}
+        | print exp ';'	             {printf("Printing %d\n", $2);}
+        | line assignment ';'	     {;}
+        | line print exp ';'	     {printf("Printing %d\n", $3);}
+        | line exit_command ';'	     {exit(EXIT_SUCCESS);}
         | line AND ';'               {printf("estoy viendo un AND\n");}
         | line BREAK ';'             {printf("estoy viendo un BREAK\n");}
         | line CONTINUE ';'          {printf("estoy viendo un CONTINUE\n");}
@@ -185,35 +187,36 @@ F       : parabre exp parcierr       {$$ = $2;}
 
 
 
-term   	: number                {$$ = $1;}
-		| identifier			{$$ = symbolVal($1);} 
+term   	: number                        {$$ = $1;}
+	| identifier			{$$ = symbolVal($1);} 
         ;
 
 %%                     /* C code */
 
-int computeSymbolIndex(char token)
-{
-	int idx = -1;
-	if(islower(token)) {
-		idx = token - 'a' + 26;
-	} else if(isupper(token)) {
-		idx = token - 'A';
-	}
-	return idx;
+int computeSymbolIndex(int token)
+{       
+	return token;
 } 
 
 /* returns the value of a given symbol */
-int symbolVal(char symbol)
+int symbolVal(int symbol)
 {
-	int bucket = computeSymbolIndex(symbol);
-	return symbols[bucket];
+        int bucket = computeSymbolIndex(symbol);
+	int type = symbols[bucket]; 
+        if(type == 0){
+                return arrNum[bucket]; 
+        }
+	
 }
 
 /* updates the value of a given symbol */
-void updateSymbolVal(char symbol, int val)
+void updateSymbolVal(int symbol, int val)
 {
 	int bucket = computeSymbolIndex(symbol);
-	symbols[bucket] = val;
+	int type = symbols[bucket]; 
+        if(type == 0){
+                arrNum[bucket] = val; 
+        }
 }
 
 int power(int a, int b)
