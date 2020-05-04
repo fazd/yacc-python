@@ -97,7 +97,7 @@
      dospunt = 313,
      punt = 314,
      gtg = 315,
-     tab = 316,
+     endl = 316,
      number = 317,
      identifier = 318
    };
@@ -110,8 +110,8 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 18 "p1.y"
-int num; int id;
+#line 19 "p1.y"
+int num; int id; char another;
 
 
 /* Line 1676 of yacc.c  */

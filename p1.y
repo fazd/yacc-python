@@ -12,10 +12,11 @@ int arrNum[500];
 int symbolVal(int symbol);
 void updateSymbolVal(int symbol, int val);
 int power(int a, int b);
+int line = 0;
 int divEnt(int a, int b);
 %}
 
-%union {int num; int id;}         /* Yacc definitions */
+%union {int num; int id; char another;}         /* Yacc definitions */
 %start line
 %token print
 %token exit_command
@@ -78,31 +79,34 @@ int divEnt(int a, int b);
 %token dospunt
 %token punt
 %token gtg
-%token tab
+%token endl
 
 %token <num> number
 %token <id> identifier
-%type <num> line exp T F X term 
-%type <id> assignment 
+%type <num> line exp T F X term function 
+%type <id> assignment  
 
 %%
 
 /* descriptions of expected inputs     corresponding actions (in C) */
 
-line    : assignment ';'	     {;}
-        | exit_command ';'	     {exit(EXIT_SUCCESS);}
-        | print exp ';'	             {printf("Printing %d\n", $2);}
-        | line assignment ';'	     {;}
-        | line print exp ';'	     {printf("Printing %d\n", $3);}
-        | line exit_command ';'	     {exit(EXIT_SUCCESS);}
-        | line AND ';'               {printf("estoy viendo un AND\n");}
-        | line BREAK ';'             {printf("estoy viendo un BREAK\n");}
-        | line CONTINUE ';'          {printf("estoy viendo un CONTINUE\n");}
-        | line DEF ';'               {printf("estoy viendo un DEF\n");}
-        | line ELIF ';'              {printf("estoy viendo un ELIF\n");}
-        | line ELSE ';'              {printf("estoy viendo un ELSE\n");}
-        | line FOR ';'               {printf("estoy viendo un FOR\n");}
-        | line IF ';'                {printf("estoy viendo un IF\n");}
+line    : assignment endl	      {line++;}
+        | exit_command endl 	      {exit(EXIT_SUCCESS);}
+        | print exp endl       	      {line++; printf("Printing %d\n", $2);}
+        | line assignment endl 	      {line+=2;}
+        | function endl               {line+=2;}
+        | line function endl          {line++;}
+        | line print exp endl	      {line++; printf("Printing %d\n", $3);}
+        | line exit_command endl      {line++; exit(EXIT_SUCCESS);}
+        | line endl                   {line++;}
+        | line AND endl               {printf("estoy viendo un AND\n");}
+        | line BREAK endl             {printf("estoy viendo un BREAK\n");}
+        | line CONTINUE endl          {printf("estoy viendo un CONTINUE\n");}
+        | line DEF endl               {printf("estoy viendo un DEF\n");}
+        | line ELIF endl              {printf("estoy viendo un ELIF\n");}
+        | line ELSE endl              {printf("estoy viendo un ELSE\n");}
+        | line FOR endl               {printf("estoy viendo un FOR\n");}
+        | line IF endl                {printf("estoy viendo un IF\n");}
         | line IMPORT ';'            {printf("estoy viendo un IMPORT\n");}
         | line IN ';'                {printf("estoy viendo un IN\n");}
         | line IS ';'                {printf("estoy viendo un IS\n");}
@@ -149,7 +153,6 @@ line    : assignment ';'	     {;}
         | line coma ';'              {printf("estoy viendo un coma\n");}
         | line dospunt ';'           {printf("estoy viendo un dospunt\n");}
         | line punt ';'              {printf("estoy viendo un punt\n");}
-        | line tab ';'               {printf("estoy viendo un tab\n");}
         | line gtg ';'               {printf("estoy viendo una cadena\n");}
         ;
 
@@ -165,6 +168,12 @@ exp     : exp bitleft X     {$$ = $1  << $3;}
         | exp OR X          {$$ = $1 | $3;}
         | exp AND X         {$$ = $1 & $3;}
         | exp xor X         {$$ = $1 ^ $3;}
+        | exp menorig X     {$$ = $1 <= $3;}
+        | exp mayorig X     {$$ = $1 >= $3;}
+        | exp dif X         {$$ = $1 != $3;}
+        | exp distin X      {$$ = $1 != $3;}
+        | exp menorque X    {$$ = $1 < $3;}
+        | exp mayorque X    {$$ = $1 > $3;}
         | X                 {$$ = $1;}
 
 X       : X '+' T           {$$ = $1 + $3;}
@@ -189,15 +198,19 @@ F       : parabre exp parcierr       {$$ = $2;}
         ;
 
 
-
 term   	: number                        {$$ = $1;}
 	| identifier			{$$ = symbolVal($1);} 
         ;
 
 vec     : identifier                  {;}
         | identifier coma vec                    {;}
+        ;
 
 v_identifier : corabre vec  corcierr     {;}
+             ;  
+
+function : DEF identifier parabre vec parcierr dospunt endl line RETURN identifier {;}
+
 
 %%                     /* C code */
 
@@ -251,4 +264,4 @@ int main (void) {
 	return yyparse ( );
 }
 
-void yyerror (char *s) {fprintf (stderr, "Hay un error %s\n", s);} 
+void yyerror (char *s) {fprintf (stderr, "Hay un error en la linea %d %s\n",(line+1), s);} 

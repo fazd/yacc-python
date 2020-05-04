@@ -282,25 +282,25 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 64
-#define YY_END_OF_BUFFER 65
+#define YY_NUM_RULES 65
+#define YY_END_OF_BUFFER 66
 static yyconst short int yy_accept[140] =
     {   0,
-        0,    0,   65,   63,   57,   61,   61,   63,   63,   43,
-       44,   63,   50,   51,   62,   62,   54,   62,   56,   62,
-       60,   55,   62,   48,   62,   49,   58,   58,   58,   52,
-       53,   46,   58,   58,   58,   58,   58,   58,   58,   58,
-       58,   58,   58,   58,   45,   47,   63,   39,    0,   33,
-       30,    0,   34,   28,   26,   27,   42,   29,   60,   35,
-       37,   40,   41,   38,   36,   58,   58,   58,   32,   58,
-       58,   58,   58,   58,   58,   58,   10,   58,   12,   13,
-       58,   15,   58,   58,   58,   58,   58,   31,    0,   59,
-       25,   24,   23,   22,   58,   58,    3,   58,   58,    6,
+        0,    0,   66,   64,   57,   58,   59,   64,   64,   43,
+       44,   64,   50,   51,   63,   63,   54,   63,   56,   63,
+       62,   55,   63,   48,   63,   49,   60,   60,   60,   52,
+       53,   46,   60,   60,   60,   60,   60,   60,   60,   60,
+       60,   60,   60,   60,   45,   47,   64,   39,    0,   33,
+       30,    0,   34,   28,   26,   27,   42,   29,   62,   35,
+       37,   40,   41,   38,   36,   60,   60,   60,   32,   60,
+       60,   60,   60,   60,   60,   60,   10,   60,   12,   13,
+       60,   15,   60,   60,   60,   60,   60,   31,    0,   61,
+       25,   24,   23,   22,   60,   60,    3,   60,   60,    6,
 
-       58,   58,   58,    9,   58,   14,   58,   58,   58,   58,
-       58,   59,   58,   19,   58,   58,    7,    8,    2,   58,
-       16,   58,   58,   58,   58,   20,    4,   58,   58,    1,
-       21,   58,   18,   58,   11,   17,   58,    5,    0
+       60,   60,   60,    9,   60,   14,   60,   60,   60,   60,
+       60,   61,   60,   19,   60,   60,    7,    8,    2,   60,
+       16,   60,   60,   60,   60,   20,    4,   60,   60,    1,
+       21,   60,   18,   60,   11,   17,   60,    5,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -990,11 +990,21 @@ YY_RULE_SETUP
 case 57:
 YY_RULE_SETUP
 #line 80 "l1.l"
-{ return tab; }
+{  ; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 81 "l1.l"
+{ return endl;}
+	YY_BREAK
+case 59:
+YY_RULE_SETUP
+#line 82 "l1.l"
+{;}
+	YY_BREAK
+case 60:
+YY_RULE_SETUP
+#line 83 "l1.l"
 {
     for(i = 0; i < idcont; i++){
         if(strcmp(array[i],yytext)==0){
@@ -1012,37 +1022,32 @@ YY_RULE_SETUP
     yylval.id = asID; return identifier;
     }
 	YY_BREAK
-case 59:
-YY_RULE_SETUP
-#line 98 "l1.l"
-{return gtg;}
-	YY_BREAK
-case 60:
-YY_RULE_SETUP
-#line 100 "l1.l"
-{yylval.num = atoi(yytext); return number;}
-	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 101 "l1.l"
-;
+#line 100 "l1.l"
+{return gtg;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 102 "l1.l"
-{return yytext[0];}
+{yylval.num = atoi(yytext); return number;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
 #line 103 "l1.l"
-{ECHO; yyerror ("unexpected character");}
+{return yytext[0];}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 106 "l1.l"
+#line 104 "l1.l"
+{ECHO; yyerror ("unexpected character");}
+	YY_BREAK
+case 65:
+YY_RULE_SETUP
+#line 107 "l1.l"
 ECHO;
 	YY_BREAK
-#line 1046 "lex.yy.c"
+#line 1051 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1928,6 +1933,6 @@ int main()
 	return 0;
 	}
 #endif
-#line 106 "l1.l"
+#line 107 "l1.l"
 
 int yywrap (void) {return 1;}

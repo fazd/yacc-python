@@ -77,7 +77,9 @@ int yylex();
 ","                     { return coma; }
 ":"                     { return dospunt; }
 "."                     { return punt; }
-"\t"                    { return tab; }
+"\t"                    {  ; }
+"\n"                    { return endl;}
+" "                     {;}
 [a-zA-Z_][a-zA-Z0-9_]*	{
     for(i = 0; i < idcont; i++){
         if(strcmp(array[i],yytext)==0){
@@ -98,7 +100,6 @@ int yylex();
 ((['][^'".\n]+[']|["][^'".\n]+["])|[’][^'"\n]+[’]) {return gtg;}
 
 [0-9]+                              {yylval.num = atoi(yytext); return number;}
-[ \n]                               ;
 [-+*/=;]                            {return yytext[0];}
 .                                   {ECHO; yyerror ("unexpected character");}
 
